@@ -1,11 +1,12 @@
 import os
 import helpers
 
+# USER DATA = OUTPUT
 def set():
     return helpers.parse_file("data/output/set.txt")  #TODO: break out stuff into .env or constants
 
 def unique():
-    return ""
+    return helpers.parse_file("data/output/unique.txt")
 
 def other():
-    return ""
+    return helpers.parse_file("data/output/other.txt")
