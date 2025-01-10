@@ -1,14 +1,19 @@
 import os, sys
 import tkinter as tk
-import helpers
+import helpers, user
 
-def main(input):  # TODO: no base input, call functions for data
-    print(input)
+def main():
+    user_set_items = user.set()
+    user_unique_items = user.unique()
+    user_other_items = user.other()
+    print(user_set_items)
+    print(user_unique_items)
+    print(user_other_items)
+    
     return 1
 
 def on_click():
-    input = helpers.parse_file("data/output/set.txt")
-    print(f"Exit: {main(input)} (expected {SUCCESS})")
+    print(f"Exit: {main()} (expected {SUCCESS})")
 
 if __name__ == "__main__":
     SUCCESS, ERROR = 1, 0
