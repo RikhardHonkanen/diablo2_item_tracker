@@ -1,0 +1,5 @@
+Structure:
+    .txt-files, Python parsed so can use own logic notation for notes
+    for now throw everything under "data", better folder structure as needed
+    going to create an "output" folder under data as well for storing current collections of data
+    currently the manually written set_items document serves as base for the project
