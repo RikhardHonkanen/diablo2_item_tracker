@@ -1,12 +1,12 @@
 import os
 import helpers
 
-# USER DATA = OUTPUT
+USER_DATA_PATH = "data/output"
 def set():
-    return helpers.parse_file("data/output/set.txt")  #TODO: break out stuff into .env or constants
+    return helpers.parse_file(f"{USER_DATA_PATH}/set.txt")
 
 def unique():
-    return helpers.parse_file("data/output/unique.txt")
+    return helpers.parse_file("{USER_DATA_PATH}/unique.txt")
 
 def other():
-    return helpers.parse_file("data/output/other.txt")
+    return helpers.parse_file("{USER_DATA_PATH}/other.txt")
