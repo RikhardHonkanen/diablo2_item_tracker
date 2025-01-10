@@ -1,5 +1,4 @@
-import os
-import sys
+import os, sys
 import tkinter as tk
 import helpers
 
@@ -8,8 +7,7 @@ def main(input):  # TODO: no base input, call functions for data
     return 1
 
 def on_click():
-    # Example of integrating UI with your existing logic
-    input = helpers.parse_file("set_items.txt")
+    input = helpers.parse_file("data/output/set.txt")
     print(f"Exit: {main(input)} (expected {SUCCESS})")
 
 if __name__ == "__main__":
