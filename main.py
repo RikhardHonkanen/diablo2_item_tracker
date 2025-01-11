@@ -6,17 +6,6 @@ import user
 # User data
 inventory = user.UserInventory()
 
-class UserInventory:
-    def __init__(self):
-        self.set_items = user.set()
-        self.unique_items = user.unique()
-        self.other_items = user.other()
-
-    def refresh(self):
-        self.set_items = user.set()
-        self.unique_items = user.unique()
-        self.other_items = user.other()
-
 def print_inventory(text_widget):
     text_widget.delete("1.0", tk.END)  # Clear previous content
     text_widget.insert(tk.END, "Set items:\n")
