@@ -8,13 +8,24 @@ inventory = user.UserInventory()
 
 def print_inventory(text_widget):
     text_widget.delete("1.0", tk.END)  # Clear previous content
+    
+    # TODO: Work with the data in set_items and the helper
+    # function to figure out the output data structure.
+    # Find data online for master data
+    set_items = helpers.sort_og_text_data(inventory.set_items)
+    
     text_widget.insert(tk.END, "Set items:\n")
-    text_widget.insert(tk.END, f"{inventory.set_items}\n\n")
+    for si in inventory.set_items:
+        text_widget.insert(tk.END, f"{si}\n\n")
+        
     text_widget.insert(tk.END, "Unique items:\n")
-    text_widget.insert(tk.END, f"{inventory.unique_items}\n\n")
+    for ui in inventory.set_items:
+        text_widget.insert(tk.END, f"{ui}\n\n")
+        
     text_widget.insert(tk.END, "Other items:\n")
-    text_widget.insert(tk.END, f"{inventory.other_items}\n")
-
+    for oi in inventory.other_items:
+        text_widget.insert(tk.END, f"{oi}\n\n")
+        
 def main():
     # Main program logic
     return 1

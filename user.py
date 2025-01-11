@@ -16,7 +16,7 @@ class UserInventory:
         self.unique_items = helpers.parse_file(f"{USER_DATA_PATH}/unique.txt")
         self.other_items = helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
 
-    def delete_set_item(self, set_item: str) -> str:
+    def delete_set_item(self, set_item: str) -> str:  #May start using type annotations
         """Delete an item from the set."""
         # Implement deletion logic here
         # For example, remove the item from the list and update the file
@@ -29,6 +29,7 @@ class UserInventory:
 
     def delete_unique_item(self, unique_item: str) -> str:
         """Delete an item from unique items."""
+        # See comments above
         if unique_item in self.unique_items:
             self.unique_items.remove(unique_item)
             return f"Deleted {unique_item} from unique items"
@@ -36,6 +37,7 @@ class UserInventory:
 
     def delete_other_item(self, other_item: str) -> str:
         """Delete an item from other items."""
+        # See comments above
         if other_item in self.other_items:
             self.other_items.remove(other_item)
             return f"Deleted {other_item} from other items"
