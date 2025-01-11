@@ -2,25 +2,41 @@ import os
 import helpers
 
 USER_DATA_PATH = "data/output"
-# Read
-def set():
-    return helpers.parse_file(f"{USER_DATA_PATH}/set.txt")
 
-def unique():
-    return helpers.parse_file(f"{USER_DATA_PATH}/unique.txt")
+class UserInventory:
+    def __init__(self):
+        # Initialize data by reading files
+        self.set_items = helpers.parse_file(f"{USER_DATA_PATH}/set.txt")
+        self.unique_items = helpers.parse_file(f"{USER_DATA_PATH}/unique.txt")
+        self.other_items = helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
 
-def other():
-    return helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
+    def refresh(self):
+        """Reload data from files."""
+        self.set_items = helpers.parse_file(f"{USER_DATA_PATH}/set.txt")
+        self.unique_items = helpers.parse_file(f"{USER_DATA_PATH}/unique.txt")
+        self.other_items = helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
 
-# Delete
-def del_set(set_item):
-    # implement delete item
-    return f"deleted {set_item}"
+    def delete_set_item(self, set_item: str) -> str:
+        """Delete an item from the set."""
+        # Implement deletion logic here
+        # For example, remove the item from the list and update the file
+        if set_item in self.set_items:
+            self.set_items.remove(set_item)
+            # Optionally, write changes back to the file
+            # helpers.write_file(f"{USER_DATA_PATH}/set.txt", self.set_items)
+            return f"Deleted {set_item} from set"
+        return f"Item {set_item} not found in set"
 
-def del_unique(unique_item):
-    # implement delete item
-    return f"deleted {unique_item}"
+    def delete_unique_item(self, unique_item: str) -> str:
+        """Delete an item from unique items."""
+        if unique_item in self.unique_items:
+            self.unique_items.remove(unique_item)
+            return f"Deleted {unique_item} from unique items"
+        return f"Item {unique_item} not found in unique items"
 
-def del_other(other_item):
-    # implement delete item
-    return f"deleted {other_item}"
+    def delete_other_item(self, other_item: str) -> str:
+        """Delete an item from other items."""
+        if other_item in self.other_items:
+            self.other_items.remove(other_item)
+            return f"Deleted {other_item} from other items"
+        return f"Item {other_item} not found in other items"
