@@ -4,19 +4,27 @@ import helpers
 import user
 
 # User data
-# TODO: remember to refresh these when writing data. 
-USR_SET = user.set()
-USR_UNIQUE = user.unique()
-USR_OTHER = user.other()
+inventory = user.UserInventory()
+
+class UserInventory:
+    def __init__(self):
+        self.set_items = user.set()
+        self.unique_items = user.unique()
+        self.other_items = user.other()
+
+    def refresh(self):
+        self.set_items = user.set()
+        self.unique_items = user.unique()
+        self.other_items = user.other()
 
 def print_inventory(text_widget):
     text_widget.delete("1.0", tk.END)  # Clear previous content
     text_widget.insert(tk.END, "Set items:\n")
-    text_widget.insert(tk.END, f"{USR_SET}\n\n")
+    text_widget.insert(tk.END, f"{inventory.set_items}\n\n")
     text_widget.insert(tk.END, "Unique items:\n")
-    text_widget.insert(tk.END, f"{USR_UNIQUE}\n\n")
+    text_widget.insert(tk.END, f"{inventory.unique_items}\n\n")
     text_widget.insert(tk.END, "Other items:\n")
-    text_widget.insert(tk.END, f"{USR_OTHER}\n")
+    text_widget.insert(tk.END, f"{inventory.other_items}\n")
 
 def main():
     # Main program logic
