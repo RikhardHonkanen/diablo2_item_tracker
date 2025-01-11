@@ -3,21 +3,27 @@ import tkinter as tk
 import helpers
 import user
 
-def on_click_print_inventory():
+# User data
+# TODO: remember to refresh these when writing data. 
+USR_SET = user.set()
+USR_UNIQUE = user.unique()
+USR_OTHER = user.other()
+
+def print_inventory(text_widget):
     text_widget.delete("1.0", tk.END)  # Clear previous content
     text_widget.insert(tk.END, "Set items:\n")
-    text_widget.insert(tk.END, f"{user.set()}\n\n")
+    text_widget.insert(tk.END, f"{USR_SET}\n\n")
     text_widget.insert(tk.END, "Unique items:\n")
-    text_widget.insert(tk.END, f"{user.unique()}\n\n")
+    text_widget.insert(tk.END, f"{USR_UNIQUE}\n\n")
     text_widget.insert(tk.END, "Other items:\n")
-    text_widget.insert(tk.END, f"{user.other()}\n")
+    text_widget.insert(tk.END, f"{USR_OTHER}\n")
 
 def main():
     # Main program logic
     return 1
 
 if __name__ == "__main__":
-    SUCCESS, ERROR = 1, 0
+    SUCCESS, ERROR, COUNTER = 1, 0, 0
 
     # Tkinter UI setup
     root = tk.Tk()
@@ -27,10 +33,6 @@ if __name__ == "__main__":
     label = tk.Label(root, text="Diablo is cute <3", font=('Arial', 18))
     label.pack()
 
-    # Button to test printing out inventory
-    button = tk.Button(root, text="Print items", command=on_click_print_inventory)
-    button.pack()
-
     # Frame to hold the Text widget and Scrollbar
     frame = tk.Frame(root)
     frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -38,6 +40,12 @@ if __name__ == "__main__":
     # Text widget for displaying content
     text_widget = tk.Text(frame, wrap=tk.WORD, height=20, width=80)
     text_widget.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    print_inventory(text_widget)
+    
+    # Button to test printing out inventory
+    # Pass the text_widget when setting the button's command
+    button = tk.Button(root, text="Print items", command=lambda: print_inventory(text_widget))
+    button.pack()
 
     # Scrollbar for the Text widget
     scrollbar = tk.Scrollbar(frame, command=text_widget.yview)
