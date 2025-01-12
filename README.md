@@ -1,4 +1,4 @@
-# Diablo II item tracker
+# Diablo II Item Tracker
 ## Gotta catch 'em all
 
 WIP. Simple GUI to input and track found items of interest in Diablo 2. Maybe stats and stuff later.
