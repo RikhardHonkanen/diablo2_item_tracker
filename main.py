@@ -43,12 +43,7 @@ def print_inventory(text_widget):
 
     # TODO: Add display logic for other categories if needed
 
-def main():
-    return 1
-
 if __name__ == "__main__":
-    SUCCESS, ERROR, COUNTER = 1, 0, 0
-
     # Tkinter UI setup
     root = tk.Tk()
     root.title("Diablo II Item Tracker")
@@ -105,6 +100,3 @@ if __name__ == "__main__":
 
     # Start the Tkinter event loop
     root.mainloop()
-
-    # Run Program
-    print(f"Exit: {main()} (expected {SUCCESS})")
