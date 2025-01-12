@@ -87,10 +87,6 @@ if __name__ == "__main__":
     text_widget.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
     print_inventory(text_widget)
 
-    # Button to print inventory
-    button = tk.Button(root, text="Print Items", command=lambda: print_inventory(text_widget))
-    button.pack()
-
     # Scrollbar for the Text widget
     scrollbar = tk.Scrollbar(frame, command=text_widget.yview)
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
