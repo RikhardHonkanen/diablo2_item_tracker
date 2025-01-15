@@ -20,6 +20,33 @@ def validate_and_add_item(item, category):
         return True
     else:
         return False
+    
+def suggest_items(event, entry, suggestions_listbox):
+    """Suggest items based on user input."""
+    user_input = entry.get().strip().lower()
+    suggestions_listbox.delete(0, tk.END)  # Clear existing suggestions
+
+    if user_input:  # If there's input, filter suggestions
+        matches = [
+            item for item in master_data.set_items.keys()
+            if user_input in item.lower()
+        ]
+        for match in matches:
+            suggestions_listbox.insert(tk.END, match)
+
+    # Show or hide the suggestions Listbox based on matches
+    if suggestions_listbox.size() > 0:
+        suggestions_listbox.place(x=entry.winfo_x(), y=entry.winfo_y() + entry.winfo_height())
+    else:
+        suggestions_listbox.place_forget()
+        
+def select_suggestion(event, entry, suggestions_listbox):
+    """Insert the selected suggestion into the Entry widget."""
+    selected_item = suggestions_listbox.get(tk.ANCHOR)
+    if selected_item:
+        entry.delete(0, tk.END)
+        entry.insert(0, selected_item)
+        suggestions_listbox.place_forget()  # Hide suggestions
 
 def add_item_callback(entry, category, output_label):
     """Callback for adding items to the inventory."""
@@ -44,10 +71,10 @@ def print_inventory(text_widget):
     # TODO: Add display logic for other categories if needed
 
 if __name__ == "__main__":
-    for value in master_data.set_items.keys():
-        print(value)
+    # for value in master_data.set_items.keys():
+    #     print(value)
     # print(master_data.unique_items)
-    exit()
+    # exit()
     # Tkinter UI setup
     root = tk.Tk()
     root.title("Diablo II Item Tracker")
@@ -60,13 +87,23 @@ if __name__ == "__main__":
     input_frame = tk.Frame(root)
     input_frame.pack(pady=10)
 
-    # Entry and Button for Set Items
+    # Updated UI for Set Items Entry with Suggestions
     set_label = tk.Label(input_frame, text="Add Set Item:")
     set_label.grid(row=0, column=0, padx=5, pady=5, sticky=tk.W)
     set_entry = tk.Entry(input_frame, width=30)
     set_entry.grid(row=0, column=1, padx=5, pady=5)
+
+    # Listbox for suggestions
+    set_suggestions = tk.Listbox(root, height=5, width=30)
+
+    # Bind events for dynamic suggestions
+    set_entry.bind("<KeyRelease>", lambda e: suggest_items(e, set_entry, set_suggestions))
+    set_suggestions.bind("<ButtonRelease-1>", lambda e: select_suggestion(e, set_entry, set_suggestions))
+    set_suggestions.bind("<Return>", lambda e: select_suggestion(e, set_entry, set_suggestions))
+
+    # Add button for adding the selected set item
     set_add_button = tk.Button(input_frame, text="Add", 
-                               command=lambda: add_item_callback(set_entry, "set_items", message_label))
+                            command=lambda: add_item_callback(set_entry, "set_items", message_label))
     set_add_button.grid(row=0, column=2, padx=5, pady=5)
 
     # Entry and Button for Unique Items
