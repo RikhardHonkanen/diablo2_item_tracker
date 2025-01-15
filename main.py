@@ -44,6 +44,9 @@ def print_inventory(text_widget):
     # TODO: Add display logic for other categories if needed
 
 if __name__ == "__main__":
+    print(master_data.set_items)
+    # print(master_data.unique_items)
+    exit()
     # Tkinter UI setup
     root = tk.Tk()
     root.title("Diablo II Item Tracker")

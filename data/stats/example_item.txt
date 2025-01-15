@@ -1,10 +1,15 @@
-One way to get stats would be to implement one file per item here with a predefined key, like:
+One way to get stats would be to implement one file per item here with 
+a predefined key, like:
 
 MIN_DMG MAX_DMG DURABILITY WHATEVER_STAT
 
-This file would contain comma separated values only (120, 190, 400, 69, etc.)
+This file would contain comma separated values only (120, 190, 400, 
+69, etc.)
 
-
-Probably too many files though, so one file for Armor, Weapon, Jewelry instead more likely. 
-Would need ID:s in master data, probably a good idea anyway.
+Probably too many files though, so one file for Armor, Weapon, Jewelry 
+instead more likely. Would need ID:s in master data, probably a 
+good idea anyway.
 Find some data online.
+
+###### ###### ###### ###### ######
+Master data now includes stats, remove this directory?
