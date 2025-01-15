@@ -11,11 +11,11 @@ master_data = master.MasterData()
 
 def validate_and_add_item(item, category):
     """Validate the item against MasterData and add to UserInventory if valid."""
-    if item in master_data.set_items:
+    if item in master_data.set_items.keys():
         if category == "set_items":
             inventory.set_items.add(item)
-        elif category == "unique_items":
-            inventory.unique_items.add(item)
+        # elif category == "unique_items":
+        #     inventory.unique_items.add(item)
         # TODO: Add logic for other categories if necessary
         return True
     else:
@@ -44,7 +44,8 @@ def print_inventory(text_widget):
     # TODO: Add display logic for other categories if needed
 
 if __name__ == "__main__":
-    print(master_data.set_items)
+    for value in master_data.set_items.keys():
+        print(value)
     # print(master_data.unique_items)
     exit()
     # Tkinter UI setup

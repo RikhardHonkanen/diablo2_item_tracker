@@ -12,17 +12,25 @@ class MasterData:
         # self.other_items = helpers.parse_file(f"{MASTER_DATA_PATH}/other.txt")
         
 def init_master_set_items():
+    """Initialize the master set items dictionary from raw data.
+
+    Reads the set items data from a tab-delimited file and organizes it into 
+    a dictionary where each item is keyed by its name. Missing or empty fields 
+    in the raw data are handled by assigning "N/A" as a default value.
+    """
     set_items_raw = helpers.parse_file(f"{MASTER_DATA_PATH}/set.txt")
     set_items = {}
     labels = set_items_raw.pop(0).split('\t')
     
-    # TODO: account for master data entries not being tab delimited at the end of item 
-    # entries when labeled props are missing
     for idx, item in enumerate(set_items_raw):
         entries = item.split('\t')
         set_items[entries[0]] = {}
         for idx, label in enumerate(labels):
-            set_items[entries[0]][label] = entries[idx]
+            # If the index is out of range or the value is an empty string, assign "N/A"
+            if idx >= len(entries) or entries[idx].strip() == "":
+                set_items[entries[0]][label] = "N/A"
+            else:
+                set_items[entries[0]][label] = entries[idx]
     
     return set_items
 
