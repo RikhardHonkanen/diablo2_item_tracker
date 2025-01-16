@@ -1,6 +1,5 @@
-import os, sys
 import tkinter as tk
-import helpers
+from dotenv import load_dotenv
 import user
 import master
 
@@ -57,24 +56,36 @@ def add_item_callback(entry, category, output_label):
         output_label.config(text=f"Invalid item: '{item}'. Not found in MasterData.")
     entry.delete(0, tk.END)
 
-def print_inventory(text_widget):
+def print_inventory(text_widget, item_group='set'):
+    """Print inventory to Text Widget.
+    By default set items, prop to toggle for unique items and other items.
+    """
+    
     text_widget.delete("1.0", tk.END)  # Clear previous content
 
-    text_widget.insert(tk.END, "Set items:\n")
-    for si in inventory.set_items:
-        text_widget.insert(tk.END, f"{si}\n")
-
-    text_widget.insert(tk.END, "\nUnique items:\n")
-    for ui in inventory.unique_items:
-        text_widget.insert(tk.END, f"{ui}\n")
-
+    if (item_group == 'set'):
+        text_widget.insert(tk.END, "Set items:\n")
+        for si in inventory.set_items:
+            text_widget.insert(tk.END, f"{si}\n")
+    elif (item_group == 'unique'):
+        text_widget.insert(tk.END, "Unique items:\n")
+        for ui in inventory.unique_items:
+            text_widget.insert(tk.END, f"{ui}\n")
+    else:
+        text_widget.insert(tk.END, "Other items:\n")
+        for oi in inventory.other_items:
+            text_widget.insert(tk.END, f"{oi}\n")
     # TODO: Add display logic for other categories if needed
 
 if __name__ == "__main__":
     # for value in master_data.set_items.keys():
     #     print(value)
-    # print(master_data.unique_items)
+    # for i in master_data.unique_items.keys():
+    #     print(i)
+    # og_data = helpers.sort_og_text_data()
+    # print(og_data)
     # exit()
+    
     # Tkinter UI setup
     root = tk.Tk()
     root.title("Diablo II Item Tracker")
@@ -118,6 +129,21 @@ if __name__ == "__main__":
     # Label for messages
     message_label = tk.Label(root, text="", fg="green")
     message_label.pack()
+    
+    # Radio buttons for toggling item groups
+    item_group_var = tk.StringVar(value='set')  # Default to 'set'
+
+    toggle_frame = tk.Frame(root)
+    toggle_frame.pack(pady=5)
+
+    tk.Label(toggle_frame, text="Toggle Item Group:").pack(side=tk.LEFT, padx=5)
+
+    tk.Radiobutton(toggle_frame, text="Set Items", variable=item_group_var, value='set', 
+                   command=lambda: print_inventory(text_widget, item_group_var.get())).pack(side=tk.LEFT, padx=5)
+    tk.Radiobutton(toggle_frame, text="Unique Items", variable=item_group_var, value='unique', 
+                   command=lambda: print_inventory(text_widget, item_group_var.get())).pack(side=tk.LEFT, padx=5)
+    tk.Radiobutton(toggle_frame, text="Other Items", variable=item_group_var, value='other', 
+                   command=lambda: print_inventory(text_widget, item_group_var.get())).pack(side=tk.LEFT, padx=5)
 
     # Frame to hold the Text widget and Scrollbar
     frame = tk.Frame(root)
