@@ -29,7 +29,7 @@ def get_user_name():
     if not os.path.exists(file_path):
         while True:
             # Ask for user input using a Tkinter dialog
-            user_name = simpledialog.askstring("Enter Your Name", "Please enter your name (max 20 characters):")
+            user_name = simpledialog.askstring("Enter Your Name", "What is your name adventurer? (max 20 characters):")
             if not user_name:  # If the user cancels or leaves blank
                 messagebox.showwarning("Input Required", "Name cannot be empty. Please try again.")
                 continue
@@ -76,7 +76,7 @@ def suggest_items(event, entry, suggestions_listbox):
 
     # Show or hide the suggestions Listbox based on matches
     if suggestions_listbox.size() > 0:
-        x_shifted = entry.winfo_x() + 200
+        x_shifted = entry.winfo_x() + 200  # Slight shift to the right
         suggestions_listbox.place(x=x_shifted, y=entry.winfo_y() + entry.winfo_height())
     else:
         suggestions_listbox.place_forget()
@@ -119,7 +119,8 @@ def print_inventory(text_widget, item_group='set'):
             text_widget.insert(tk.END, f"{oi}\n")
     # TODO: Add display logic for other categories if needed
 
-if __name__ == "__main__":
+def main():  # Main entry point
+    ### TESTING ###
     # for value in master_data.set_items.keys():
     #     print(value)
     # for i in master_data.unique_items.keys():
@@ -127,6 +128,7 @@ if __name__ == "__main__":
     # og_data = helpers.sort_og_text_data()
     # print(og_data)
     # exit()
+    ### END TESTING ###
     
     # Tkinter UI setup
     root = tk.Tk()
@@ -210,3 +212,7 @@ if __name__ == "__main__":
 
     # Start the Tkinter event loop
     root.mainloop()
+    
+if __name__ == "__main__":    
+    main()
+    
