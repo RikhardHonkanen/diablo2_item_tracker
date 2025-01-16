@@ -8,6 +8,18 @@ def parse_file(path):
         parsed_input = f.read().split('\n')
     return parsed_input
 
+def write_to_file(path, data):    
+    if not os.path.isabs(path):
+        # If the path is relative, make it relative to the script's directory
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), path)
+    with open(path, "w") as f:
+        if isinstance(data, (list, tuple)):
+            # Write each item on a new line if data is a list or tuple
+            f.write('\n'.join(str(item) for item in data))
+        else:
+            # Otherwise, write data as is
+            f.write(str(data))
+
 # Function may be removed, organizes original raw data
 def sort_og_text_data():
     data = parse_file("data/output/set_original.txt")
