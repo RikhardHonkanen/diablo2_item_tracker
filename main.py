@@ -1,4 +1,6 @@
+import os
 import tkinter as tk
+from tkinter import simpledialog, messagebox
 from dotenv import load_dotenv
 import user
 import master
@@ -8,6 +10,47 @@ inventory = user.UserInventory()
 # Master data
 master_data = master.MasterData()
 
+
+    
+def validate_name(name):
+    """Validate the user's name."""
+    if len(name) > 20:
+        return False
+    # Allow only alphanumeric and common symbols
+    allowed_chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{};:'\",.<>?/\\|`~ "
+    return all(c in allowed_chars for c in name)
+
+def get_user_name():
+    """Prompt the user for their name if the file doesn't exist."""
+    file_path = "data/output/name.txt"
+
+    # Ensure directory exists
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+
+    # Check if the file exists
+    if not os.path.exists(file_path):
+        while True:
+            # Ask for user input using a Tkinter dialog
+            user_name = simpledialog.askstring("Enter Your Name", "Please enter your name (max 20 characters):")
+            if not user_name:  # If the user cancels or leaves blank
+                messagebox.showwarning("Input Required", "Name cannot be empty. Please try again.")
+                continue
+
+            if validate_name(user_name):
+                # Save the name to the file
+                with open(file_path, "w") as f:
+                    f.write(user_name)
+                return user_name
+            else:
+                messagebox.showerror(
+                    "Invalid Name",
+                    "Name must only contain letters, numbers, or common symbols and be at most 20 characters long."
+                )
+    else:
+        # Read the existing name from the file
+        with open(file_path, "r") as f:
+            return f.read().strip()
+        
 def validate_and_add_item(item, category):
     """Validate the item against MasterData and add to UserInventory if valid."""
     if item in master_data.set_items.keys():
@@ -90,9 +133,14 @@ if __name__ == "__main__":
     root = tk.Tk()
     root.title("Diablo II Item Tracker")
     root.geometry("800x600")
+    
+    # Prompt for name if not already set
+    user_name = get_user_name()
+    ownership = "'" if user_name.endswith('s') else "'s"
 
-    label = tk.Label(root, text="Diablo is cute <3", font=('Arial', 18))
-    label.pack()
+    # Display the name in the main window
+    greeting_label = tk.Label(root, text=f"{user_name}{ownership} DII Inventory", font=('Arial', 18))
+    greeting_label.pack(pady=10)
 
     # Frame for inputs and buttons
     input_frame = tk.Frame(root)
