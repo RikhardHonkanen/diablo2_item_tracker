@@ -4,7 +4,23 @@ for now throw everything under "data", better folder structure as needed
 going to create an "output" folder under data as well for storing current collections of data
 currently the manually written set_items document serves as base for the project
 
-2025-01-16
+2025-01-15
 (Some initial thoughts above)
 Structure is coming along. Backup folder probably should get used at some point. Have to figure out exact output structure.
 So far I've let ChatGPT do most of the heavy lifting with Tkinter. Will have to have a closer look at the specifics as needed.
+
+2025-01-16
+Refactor time after some brainstorming with ChatGPT:
+project/
+│
+├── main.py            # Entry point for the application
+├── ui/
+│   ├── __init__.py    # Makes 'ui' a package
+│   ├── main_window.py # Contains the main UI class
+│   ├── forms.py       # Handles input forms
+│   ├── tables.py      # Handles inventory tables
+│
+├── helpers/
+│   ├── __init__.py    # Makes 'helpers' a package
+│   ├── validation.py  # Validation logic
+│   ├── utils.py       # General helper functions
