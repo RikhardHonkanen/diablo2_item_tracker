@@ -1,4 +1,3 @@
-import os
 import helpers
 
 USER_DATA_PATH = "data/output"
@@ -42,3 +41,20 @@ class UserInventory:
             self.other_items.remove(other_item)
             return f"Deleted {other_item} from other items"
         return f"Item {other_item} not found in other items"
+    
+    # TODO: functions
+    def write_to_file(self, path):
+        """Accepts a path and the data to write to the file
+        returns 1 on success (?)
+        """
+        file = USER_DATA_PATH + path
+        data = {}
+        if (path == '/set'):
+            pass
+        
+        return 1
+    
+    
+    def add_unique_item(self, unique_item) -> str:
+        """Add a unique item to inventory."""
+        return f"{unique_item} added to your inventory."
