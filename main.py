@@ -10,8 +10,6 @@ inventory = user.UserInventory()
 # Master data
 master_data = master.MasterData()
 
-
-    
 def validate_name(name):
     """Validate the user's name."""
     if len(name) > 20:
@@ -101,7 +99,7 @@ def add_item_callback(entry, category, output_label):
 
 def print_inventory(text_widget, item_group='set'):
     """Print inventory to Text Widget.
-    By default set items, prop to toggle for unique items and other items.
+    By default set items, param item_group toggles set/unique/other items.
     """
     
     text_widget.delete("1.0", tk.END)  # Clear previous content
