@@ -1,5 +1,10 @@
 Structure:
-    .txt-files, Python parsed so can use own logic notation for notes
-    for now throw everything under "data", better folder structure as needed
-    going to create an "output" folder under data as well for storing current collections of data
-    currently the manually written set_items document serves as base for the project
+.txt-files, Python parsed so can use own logic notation for notes
+for now throw everything under "data", better folder structure as needed
+going to create an "output" folder under data as well for storing current collections of data
+currently the manually written set_items document serves as base for the project
+
+2025-01-16
+(Some initial thoughts above)
+Structure is coming along. Backup folder probably should get used at some point. Have to figure out exact output structure.
+So far I've let ChatGPT do most of the heavy lifting with Tkinter. Will have to have a closer look at the specifics as needed.
