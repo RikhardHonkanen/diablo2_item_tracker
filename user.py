@@ -17,7 +17,7 @@ class UserInventory:
         self.other_items = helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
 
     def delete_set_item(self, set_item: str) -> str:  #May start using type annotations
-        """Delete an item from the set."""
+        """Delete an item from set items."""
         # Implement deletion logic here
         # For example, remove the item from the list and update the file
         if set_item in self.set_items:
