@@ -9,7 +9,8 @@ def parse_file(path):
     return parsed_input
 
 # Function may be removed, organizes original raw data
-def sort_og_text_data(data):
+def sort_og_text_data():
+    data = parse_file("data/output/set_original.txt")
     completed_sets = []
     incomplete_sets = {}
 
