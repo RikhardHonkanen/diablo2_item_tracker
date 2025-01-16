@@ -76,7 +76,8 @@ def suggest_items(event, entry, suggestions_listbox):
 
     # Show or hide the suggestions Listbox based on matches
     if suggestions_listbox.size() > 0:
-        suggestions_listbox.place(x=entry.winfo_x(), y=entry.winfo_y() + entry.winfo_height())
+        x_shifted = entry.winfo_x() + 200
+        suggestions_listbox.place(x=x_shifted, y=entry.winfo_y() + entry.winfo_height())
     else:
         suggestions_listbox.place_forget()
         
@@ -130,14 +131,14 @@ if __name__ == "__main__":
     # Tkinter UI setup
     root = tk.Tk()
     root.title("Diablo II Item Tracker")
-    root.geometry("800x600")
+    root.geometry("480x800")
     
     # Prompt for name if not already set
     user_name = get_user_name()
-    ownership = "'" if user_name.endswith('s') else "'s"
+    possessive_suffix = "'" if user_name.endswith('s') else "'s"
 
     # Display the name in the main window
-    greeting_label = tk.Label(root, text=f"{user_name}{ownership} DII Inventory", font=('Arial', 18))
+    greeting_label = tk.Label(root, text=f"{user_name}{possessive_suffix} DII Inventory", font=('Arial', 18))
     greeting_label.pack(pady=10)
 
     # Frame for inputs and buttons
