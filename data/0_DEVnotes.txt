@@ -24,3 +24,5 @@ project/
 │   ├── __init__.py    # Makes 'helpers' a package
 │   ├── validation.py  # Validation logic
 │   ├── utils.py       # General helper functions
+
+Probably another refactor for the classes shortly.
