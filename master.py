@@ -7,7 +7,7 @@ MASTER_DATA_PATH = "../data/master"  # Rel. to parse_file() func
 class MasterData:
     def __init__(self):
         # Initialize data by reading files
-        self.set_items = init_master_set_items()
+        self.set_items, self.set_item_names = init_master_set_items()
         self.unique_items = init_master_unique_items()
         # self.other_items = helpers.parse_file(f"{MASTER_DATA_PATH}/other.txt")
 
@@ -29,6 +29,7 @@ def init_master_set_items():
     set_items_raw = utils.parse_file(f"{MASTER_DATA_PATH}/set.txt")
     labels = set_items_raw.pop(0).split('\t')  # Pop the row with labels
     set_items = {}
+    set_item_names = set()
     
     for item in set_items_raw:
         entries = item.split('\t')
@@ -38,7 +39,8 @@ def init_master_set_items():
                 set_items[set_name] = {}  # Initialize the set dictionary if not present
             
             item_name = entries[0]
-            set_items[set_name][item_name] = {}  # Add the item to the inner dictionary
+            set_items[set_name][item_name] = {}     # Add the item to the inner dictionary
+            set_item_names.add(item_name)            # Add item name to flat list of names
             
             # Populate item details (if needed, based on labels)
             for idx, label in enumerate(labels):
@@ -48,7 +50,7 @@ def init_master_set_items():
                 value = entries[idx] if idx < len(entries) and entries[idx].strip() else "N/A"
                 set_items[set_name][item_name][label] = value
     
-    return set_items
+    return set_items, set_item_names
 
 def init_master_unique_items():
     """Initialize master unique items"""
