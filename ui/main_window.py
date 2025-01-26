@@ -8,10 +8,11 @@ def suggest_items(event, entry, suggestions_listbox):
     suggestions_listbox.delete(0, tk.END)  # Clear existing suggestions
 
     if user_input:  # If there's input, filter suggestions
-        matches = [
-            item for item in AppContext.master_data.set_items.keys()
-            if user_input in item.lower()
-        ]
+        matches = []
+        for set_name, items in AppContext.master_data.set_items.items():
+            matches.extend(
+                item for item in items.keys() if user_input in item.lower()
+            )
         for match in matches:
             suggestions_listbox.insert(tk.END, match)
 

@@ -11,16 +11,13 @@ class MasterData:
         self.unique_items = init_master_unique_items()
         # self.other_items = helpers.parse_file(f"{MASTER_DATA_PATH}/other.txt")
 
-def init_all_set_names_in_collection(set_items_raw, set_items):
-    """index	*ID	set	item	*ItemName	rarity
-    First few entries in the "labels" rowin master data. We are mainly 
-    interested in the "set" entry at index 2 for each row here.
-    """
-    all_sets = set()
-    for item in set_items_raw:
-        entries = item.split('\t')
-        if (len(entries) > 2 and entries[2] != ''):
-            all_sets.add(entries[2])
+# def init_all_sets(set_items_raw):
+#     """index	*ID	set	item	*ItemName	rarity
+#     ^^First few entries in the "labels" row in master data^^ We are mainly 
+#     interested in the "set" entry at index 2 for each row here.
+#     """
+    
+#     return set_items
 
 def init_master_set_items():
     """Initialize the master set items dictionary from raw data.
@@ -30,25 +27,31 @@ def init_master_set_items():
     in the raw data are handled by assigning "N/A" as a default value.
     """
     set_items_raw = utils.parse_file(f"{MASTER_DATA_PATH}/set.txt")
-    labels = set_items_raw.pop(0).split('\t')  # Pop the row with labels, careful if moving this
-    
+    labels = set_items_raw.pop(0).split('\t')  # Pop the row with labels
     set_items = {}
-    set_items = init_all_set_names_in_collection(set_items_raw, set_items)
     
-    for idx, item in enumerate(set_items_raw):
+    for item in set_items_raw:
         entries = item.split('\t')
-        set_items[entries[0]] = {}
-        for idx, label in enumerate(labels):
-            # If the index is out of range or the value is an empty string, assign "N/A"
-            if idx >= len(entries) or entries[idx].strip() == "":
-                set_items[entries[0]][label] = "N/A"
-            else:
-                set_items[entries[0]][label] = entries[idx]
+        set_name = entries[2] if len(entries) > 2 else ""
+        if set_name:  # Only process items with a valid set name
+            if set_name not in set_items:
+                set_items[set_name] = {}  # Initialize the set dictionary if not present
+            
+            item_name = entries[0]
+            set_items[set_name][item_name] = {}  # Add the item to the inner dictionary
+            
+            # Populate item details (if needed, based on labels)
+            for idx, label in enumerate(labels):
+                skip = [0, 2]
+                if (idx in skip or idx > 4):
+                    continue
+                value = entries[idx] if idx < len(entries) and entries[idx].strip() else "N/A"
+                set_items[set_name][item_name][label] = value
     
     return set_items
 
 def init_master_unique_items():
-    """Initialize master unique items, same handling as for set items"""
+    """Initialize master unique items"""
     unique_items_raw = utils.parse_file(f"{MASTER_DATA_PATH}/unique.txt")
     unique_items = {}
     labels = unique_items_raw.pop(0).split('\t')
