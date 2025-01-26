@@ -1,19 +1,19 @@
-import helpers
+import helpers.utils as utils
 
-USER_DATA_PATH = "data/output"
+USER_DATA_PATH = "../data/output"  # Rel. to parse_file() func
 
 class UserInventory:
     def __init__(self):
         # Initialize data by reading files
-        self.set_items = helpers.parse_file(f"{USER_DATA_PATH}/set.txt")
-        self.unique_items = helpers.parse_file(f"{USER_DATA_PATH}/unique.txt")
-        self.other_items = helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
+        self.set_items = utils.parse_file(f"{USER_DATA_PATH}/set.txt")
+        self.unique_items = utils.parse_file(f"{USER_DATA_PATH}/unique.txt")
+        self.other_items = utils.parse_file(f"{USER_DATA_PATH}/other.txt")
 
     def refresh(self):
         """Reload data from files."""
-        self.set_items = helpers.parse_file(f"{USER_DATA_PATH}/set.txt")
-        self.unique_items = helpers.parse_file(f"{USER_DATA_PATH}/unique.txt")
-        self.other_items = helpers.parse_file(f"{USER_DATA_PATH}/other.txt")
+        self.set_items = utils.parse_file(f"{USER_DATA_PATH}/set.txt")
+        self.unique_items = utils.parse_file(f"{USER_DATA_PATH}/unique.txt")
+        self.other_items = utils.parse_file(f"{USER_DATA_PATH}/other.txt")
 
     def delete_set_item(self, set_item: str) -> str:  #May start using type annotations
         """Delete an item from set items."""
